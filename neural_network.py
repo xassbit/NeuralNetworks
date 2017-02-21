@@ -33,6 +33,8 @@ def vectorized_result(j):
     e = np.zeros((10, 1))
     e[j] = 1.0
     return e
+    
+# Own functions
 
 def import_data(file_loc, separator, id_colname):
     dataset = pd.read_csv(filepath_or_buffer=file_loc, sep=separator)
@@ -45,8 +47,6 @@ def import_data(file_loc, separator, id_colname):
     print(dataset.head(5))
 
     return dataset, idcol
-
-# Own functions
 
 def make_data_frame(input_data, id_col_df):
     if isinstance(input_data, pd.DataFrame):
