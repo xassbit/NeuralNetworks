@@ -11,31 +11,13 @@ import pickle
 import gzip
 
 from network import Network
+from mnist import Import
+
+
 # Functions
 
-# MNIST data
-def load_data():
-    f = gzip.open('mnist.pkl.gz', 'rb')
-    training_data, validation_data, test_data = pickle.load(f)
-    f.close()
-    return (training_data, validation_data, test_data)
 
-def load_data_wrapper():
-    tr_d, va_d, te_d = load_data()
-    training_inputs = [np.reshape(x, (784, 1)) for x in tr_d[0]]
-    training_results = [vectorized_result(y) for y in tr_d[1]]
-    training_data = zip(training_inputs, training_results)
-    validation_inputs = [np.reshape(x, (784, 1)) for x in va_d[0]]
-    validation_data = zip(validation_inputs, va_d[1])
-    test_inputs = [np.reshape(x, (784, 1)) for x in te_d[0]]
-    test_data = zip(test_inputs, te_d[1])
-    return (training_data, validation_data, test_data)
 
-def vectorized_result(j):
-    e = np.zeros((10, 1))
-    e[j] = 1.0
-    return e
-    
 # Own functions
 
 def import_data(file_loc, separator, id_colname):
@@ -49,6 +31,7 @@ def import_data(file_loc, separator, id_colname):
     print(dataset.head(5))
 
     return dataset, idcol
+
 
 def make_data_frame(input_data, id_col_df):
     if isinstance(input_data, pd.DataFrame):
@@ -119,15 +102,15 @@ def one_hot_encoder(vector):
 
 
 
-    # Miscellaneous functions
+# Miscellaneous functions
 def sigmoid(z):
     return 1.0 / (1.0 + np.exp(-z))
+
 
 def sigmoid_prime(z):
     return sigmoid(z) * (1 - sigmoid(z))
 
 
-    
 if __name__ == "__main__":
     # Script
 
@@ -135,7 +118,6 @@ if __name__ == "__main__":
     filename = "/iris.csv"
     file_loc = work_dir + filename
     os.chdir(work_dir)
-
 
     """
     #Alternative Dataset
@@ -157,11 +139,14 @@ if __name__ == "__main__":
     y_test = one_hot_encoder(vector=y_test_1d)
     """
 
-    #MNIST Data
-    training_data, validation_data, test_data = load_data_wrapper()
+    getData = Import()
+    training_data, validation_data, test_data = getData.load_data_wrapper
 
     net = Network([784, 30, 10])
+
+    """
     net.SGD(training_data, 3, 10, 3.0, test_data=test_data)
 
     weights = net.weights
     biases = net.biases
+    """
