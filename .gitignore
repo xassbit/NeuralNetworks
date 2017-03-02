@@ -1,2 +1,16 @@
+# Pycharm
 .idea/
-__pycache__/
+
+# Python
+*.pyc
+**/__pycache__
+**/*.pyo
+
+
+# macOS
+**/.DS_Store
+**/.localized
+
+# virtual environment
+venv/
+activate/
