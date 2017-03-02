@@ -1,17 +1,16 @@
 #!/usr/local/bin/python3
 
-# Modules
+import gzip
+import math as mt
+import os
+import pickle
+import random
 
 import numpy as np
 import pandas as pd
-import os
-import math as mt
-import random
-import pickle
-import gzip
 
-from network import Network
 from mnist import Import
+from network import Network
 
 
 # Functions
